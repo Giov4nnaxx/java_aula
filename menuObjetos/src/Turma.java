@@ -35,7 +35,15 @@ public class Turma {
         return periodo;
     }
 
-    public void setPeriodo(Periodo periodo) {
-        this.periodo = periodo;
+    public void setPeriodo(Periodo periodo) {this.periodo = periodo;}
+
+    @Override
+    public String toString() {
+        return "Turma{" +
+                "curso='" + curso + '\'' +
+                ", sigla='" + sigla + '\'' +
+                ", periodo=" + periodo +
+                '}';
     }
 }
+
