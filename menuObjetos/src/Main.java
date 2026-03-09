@@ -250,11 +250,63 @@ public class Main {
         listarTurmasIndiceSigla();
         int idAtualizar = validaIdTurma();
 
-        Periodo periodo = listaTurmas.get(idAtualizar).getPeriodo();
-
-        System.out.printf("O período atual é: %s\n", periodo);
-
+        System.out.printf("O período atual é: %s\n", listaTurmas.get(idAtualizar).getPeriodo());
         atualizarPeriodo(idAtualizar);
+
+        System.out.printf("O curso atual é: %s\n", listaTurmas.get(idAtualizar).getCurso());
+        atualizarCurso(idAtualizar);
+
+        // ATUALIZAR SIGLA
+        System.out.printf("A sigla atual é: %s\n", listaTurmas.get(idAtualizar).getSigla());
+        atualizarSigla(idAtualizar);
+    }
+
+    private static void atualizarSigla(int idAtualizar) {
+        boolean rodarNovamente = true;
+        while (rodarNovamente) {
+            String opcaoSigla = Leitura.dados("\nDeseja modificar a sigla? (S/N): ").toUpperCase();
+            switch (opcaoSigla) {
+                case "S":
+                    String sigla = Leitura.dados("Digite a sigla: ");
+                    while(!validarSigla(sigla)){
+                        System.out.println("Sigla Inválida! Precisa conter texto e não pode ser repetida");
+                        sigla = Leitura.dados("Digite a sigla: ");
+                    }
+                    listaTurmas.get(idAtualizar).setSigla(sigla);
+                    System.out.println("Sigla atualizada com sucesso para "+ sigla);
+                    rodarNovamente = false;
+                    break;
+                case "N":
+                    rodarNovamente = false;
+                    break;
+                default:
+                    System.out.println("Opção invalida! Escolha S para SIM ou N para NÃO");
+            }
+        }
+    }
+
+    private static void atualizarCurso(int idAtualizar) {
+        boolean rodarNovamente = true;
+        while (rodarNovamente) {
+            String opcaoCurso = Leitura.dados("\nDeseja modificar o curso? (S/N): ").toUpperCase();
+            switch (opcaoCurso) {
+                case "S":
+                    String curso = Leitura.dados("Digite o curso:");
+                    while(!isCharacter(curso)){
+                        System.out.println("Nome do curso inválido! Não use números ou caracteres especiais, por favor");
+                        curso = Leitura.dados("Digite o curso:");
+                    }
+                    listaTurmas.get(idAtualizar).setCurso(curso);
+                    System.out.println("Curso atualizado com sucesso para "+ curso);
+                    rodarNovamente = false;
+                    break;
+                case "N":
+                    rodarNovamente = false;
+                    break;
+                default:
+                    System.out.println("Opção invalida! Escolha S para SIM ou N para NÃO");
+            }
+        }
     }
 
     private static void atualizarPeriodo(int idAtualizar) {
@@ -268,7 +320,6 @@ public class Main {
                     rodarNovamente = false;
                     break;
                 case "N":
-                    System.out.println("Operação cancelada!");
                     rodarNovamente = false;
                     break;
                 default:
