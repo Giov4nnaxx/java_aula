@@ -49,7 +49,6 @@ public class Aluno implements Ativavel{
         return "Aluno{" +
                 "nome='" + nome + '\'' +
                 ", dataNascimento=" + dataNascimento +
-                ", turma=" + turma +
                 '}';
     }
 }
